@@ -1,0 +1,128 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/mapleFU/CloudBot/1.0.0
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: Simple Inventory API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /robots:
+
+components:
+  schemas:
+    Service:
+      required:
+        - service_id
+      properties:
+        service_id:
+          type: integer
+          example: 213
+          description: "服务对应的id"
+
+    ManagedGroup:
+      properties:
+        sevicers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Service"
+          description: "管理的组使用的服务列表"
+        group_id:
+          type: string
+          description: "管理的组的组名"
+
+    Robot:
+      properties:
+        robot_name:
+          type: string
+          example: qq-bot1232139
+          description: 类似机器人的 uid
+        status:
+          type: string
+          enum:
+            - "booting"
+            - "offline"
+            - "required_login"
+            - "running"
+
+          example: "Running"
+          description: 目前的状态
+
+        managed_groups:
+          type: array
+          items:
+            schema:
+              $ref: '#/components/schemas/ManagedGroup'
+
+        robot_type:
+          type: string
+          example: "wechat"
+          enum:
+            - "wechat"
+            - "qq"
+
+    RobotRecvMessage:
+      properties:
+        group_id:
+          type: string
+          example: "123781312"
+          description: "机器人接受的消息的格式，由ServiceManager 发送，BotManager 接收"
+        room_id:
+          type: string
+          example: "快乐家族"
+          description: "微信房间的id"
+        message:
+          type: string
+          example: "这是处理返回的消息"
+        platform:
+          type: string
+          enum:
+            - "wechat"
+            - "qq"
+        robot_name:
+          type: string
+          example: "aldha"
+          description: "对应机器人的名称"
+
+    RobotSMSData:
+      properties:
+        text:
+          type: string
+          description: "消息的文本内容"
+          example: "from mwish with love"
+        url:
+          type: string
+          format: url
+          description: "对应消息的链接"
+        file:
+          type: string
+        face:
+          type: string
+        qq:
+          type: string
+
+
+    RobotSendMessageSegment:
+      properties:
+        type:
+          type: string
+          enum:
+            - "text"
+        data:
+          type: object
+          $ref: '#/components/schemas/RobotSMSData'
+
+    RobotSendMessage:
+      properties:
+        platform:
+          type: string
+          enum:
+            - "wechat"
+            - "qq"
+
