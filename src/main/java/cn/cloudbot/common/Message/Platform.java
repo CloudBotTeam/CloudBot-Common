@@ -3,7 +3,9 @@ package cn.cloudbot.common.Message;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum Platform {
+import java.io.Serializable;
+
+public enum Platform implements Serializable {
     @JsonProperty("qq")
     QQ,
     @JsonProperty("wechat")

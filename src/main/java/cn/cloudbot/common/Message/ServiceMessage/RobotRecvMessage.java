@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RobotRecvMessage {
+public class RobotRecvMessage implements Serializable {
     private String robot_name;
 
     private String group_id;
