@@ -22,4 +22,7 @@ public class RobotSendMessage implements Serializable {
 
     private RobotMessageSender sender;
 
+//    群组的 ID
+    private String group_id;
+
 }
